@@ -1,12 +1,18 @@
 /*general formatting*/
 
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
 /* Log In / Sign up formatting*/
 
 #login-header, #signup-header{
+    grid-column: 1/4;
+    grid-row: 1/2;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
-    height: 50px;
     border-bottom: 2px solid black;
 }
 
@@ -16,22 +22,29 @@ header #logo{
 }
 header #page-name{
     grid-column: 2/3;
+    justify-self: center;
 }
 header #user-options{
     grid-column: 3/4;
-    justify-self: end;
+    justify-self: center;
 }
 
 #container{
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr;
-    grid-template-rows: 50px auto;
+    grid-template-rows: 100px auto;
+    min-height: 100vh;
 }
 
 #centered-main{
     grid-column: 2/3;
     grid-row: 2/3;
     justify-self: center;
+}
+
+.form-title{
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .form-input{
