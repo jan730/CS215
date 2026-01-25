@@ -3,12 +3,13 @@
 body{
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: rgb(102, 102, 102);
 }
 
 /*a global grid so header is the same across pages*/
 #global-formatting{
     display: grid;
-    grid-template-rows: 50px auto;
+    grid-template-rows: 50px 1fr;
     /*50 px header, the rest is body*/
 
     min-height: 100vh;
@@ -19,6 +20,7 @@ header{
     grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     border-bottom: 2px solid black;
+    background-color: rgb(151, 151, 151);
 }
 
 header #logo{
@@ -119,8 +121,11 @@ header #user-options{
 
 #dashboard-body{
     display: grid;
-    grid-template-columns: 1fr max-content 5fr max-content 1fr;
-    grid-template-rows: max-content 1fr;
+    grid-template-columns: 1fr max-content 3fr max-content 1fr;
+    grid-template-rows: max-content 6fr 1fr;
+
+    max-height: calc(100vh - 52px);
+    /*100vh - 52 from header and border*/
 }
 
 #dashboard-games-title{
@@ -136,11 +141,17 @@ header #user-options{
 #dashboard-games-display{
     grid-column: 2/5;
     grid-row: 2/3;
-    border: 2px solid black;
+
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 16px;
     padding: 16px;
+
+    border: 2px solid black;
+    border-radius: 10px;
+    
+    overflow-y: auto;
+    max-height: 100%;
 }
 
 .thumbnail{
