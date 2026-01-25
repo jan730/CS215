@@ -5,11 +5,16 @@ body{
     font-family: Arial, sans-serif;
 }
 
-/* Log In / Sign up formatting*/
+/*a global grid so header is the same across pages*/
+#global-formatting{
+    display: grid;
+    grid-template-rows: 50px auto;
+    /*50 px header, the rest is body*/
 
-#login-header, #signup-header{
-    grid-column: 1/4;
-    grid-row: 1/2;
+    min-height: 100vh;
+}
+
+header{
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
@@ -29,11 +34,23 @@ header #user-options{
     justify-self: center;
 }
 
+/* Log In / Sign up formatting*/
+
+/* #login-header, #signup-header{
+    grid-column: 1/4;
+    grid-row: 1/2;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    border-bottom: 2px solid black;
+} */
+
+
 #container{
     display: grid;
     grid-template-columns: 1fr 1.5fr 1fr;
-    grid-template-rows: 100px auto;
-    min-height: 100vh;
+    /* grid-template-rows: 100px auto;
+    min-height: 100vh; */
 }
 
 #centered-main{
@@ -96,13 +113,9 @@ header #user-options{
 
 
 /*dashboard formatting*/
-#dashboard-container{
-    display: grid;
-    grid-template-rows: 50px auto;
-    /*50 px header, the rest is body*/
-
-    min-height: 100vh;
-}
+/* #dashboard-container{
+    
+} */
 
 #dashboard-body{
     display: grid;

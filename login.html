@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Gaming History</title>
+        <title>Login</title>
         <link rel="stylesheet" type="text/css" href="style.css" />
     </head>
     <body>
-        <div id="container">
-            <header id="login-header">
+        <div id="global-formatting">
+            <header>
                 <div id="logo">
                     <p>Logo here</p>
                 </div>
@@ -17,31 +17,33 @@
                     <p>Log out</p> 
                 </div>
             </header>
-            <main id="centered-main">
-                <div class="form-title">
-                    <h2>Log In</h2>
-                </div>
-                <form action="dashboard.html" method="post" class="auth-form">
-                    <div class="form-input">
-                        <div>
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email">
-                        </div>
-                        <div>
-                            <label for="password">Password</label>
-                            <input type="password" id="password" name="password">
-                        </div>
+            <div id="container">
+                <main id="centered-main">
+                    <div class="form-title">
+                        <h2>Log In</h2>
                     </div>
-                    <div class="form-submit-button">
-                        <input type="submit" value="Log In" />
-                    </div>
-                </form>
-                <div class="form-note">
-                    <a href="signup.html" id="sign-up">Create an account?</a>
-                    <!--Forgot password button will require a separate page-->
-                    <a href="" id="forgot-pass">Forgot password?</a>
-                </div>    
-            </main>
+                    <form action="dashboard.html" method="post" class="auth-form">
+                        <div class="form-input">
+                            <div>
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email">
+                            </div>
+                            <div>
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password">
+                            </div>
+                        </div>
+                        <div class="form-submit-button">
+                            <input type="submit" value="Log In" />
+                        </div>
+                    </form>
+                    <div class="form-note">
+                        <a href="signup.html" id="sign-up">Create an account?</a>
+                        <!--Forgot password button will require a separate page-->
+                        <a href="" id="forgot-pass">Forgot password?</a>
+                    </div>    
+                </main>
+            </div>
         </div>
     </body>
 </html>
