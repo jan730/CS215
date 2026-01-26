@@ -8,17 +8,52 @@
         <div id="global-formatting">
             <header>
                 <div id="logo">
-                    <p>Logo here</p>
+                    <p>LOGO</p>
                 </div>
                 <div id="page-name">
-                    <p>Header</p>
+                    <p>User Dashboard</p>
                 </div>
                 <div id="user-options">
-                    <p>Log out</p> 
+                    <p><a href="login.html">Sign Out</a></p> 
                 </div>
             </header>
-            <div>
-
+            <div id="user-dashboard-body">
+                <div id="user-dashboard-container">
+                    <div id="user-image-section">
+                        <p>Image</p>
+                    </div>
+                    
+                    <div id="user-info-display">
+                        <h3>User Information:</h3>
+                        <p><strong>nickname:</strong> Name1</p>
+                        <p><strong>email:</strong> Name1@email.com</p>
+                        <p><strong>date of birth:</strong> dd/mm/yyyy</p>
+                    </div>
+                    
+                    <div id="user-update-section">
+                        <h3>Update User Information</h3>
+                        <form>
+                            <div class="form-group">
+                                <label>Nickname:</label>
+                                <input type="text" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label>Avatar:</label>
+                                <button type="button">Browse</button>
+                            </div>
+                            <div class="form-group">
+                                <label>Date of Birth (dd/mm/yy):</label>
+                                <input type="text" placeholder="">
+                            </div>
+                            <button type="submit" class="update-btn">Update</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div id="user-dashboard-footer">
+                    <p><a href="#">Delete Account</a></p>
+                    <p><a href="gameHistory.html">Gaming History</a></p>
+                </div>
             </div>
         </div>
     </body>
