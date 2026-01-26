@@ -178,7 +178,7 @@ header a{
 #dashboard-my-account a{
     color: white;
     text-decoration: underline;
-    align-self: en;
+    align-self: end;
 }
 
 #dashboard-games-display{
@@ -369,7 +369,10 @@ header a{
 
 .update-btn {
     justify-self: center;
-    padding: 8px 20px !important;
+}
+
+.update-btn input[type="submit"] {
+    padding: 8px 20px;
     margin-top: 10px;
 }
 
@@ -403,8 +406,8 @@ header a{
 
 footer {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 15px;
 
     border-top: 2px solid #0466C8;
 
@@ -416,7 +419,16 @@ footer {
 }
 
 footer a{
-    grid-column: 2/3;
     color: white;
     text-decoration: none;
+}
+
+footer #xhtml-validator{
+    grid-column: 2/3;
+    justify-self: end;
+}
+
+footer #css-validator{
+    grid-column: 3/4;
+    justify-self: start;
 }
