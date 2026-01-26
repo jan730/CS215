@@ -14,7 +14,7 @@
                     <p>User Dashboard</p>
                 </div>
                 <div id="user-options">
-                    <p><a href="login.html">Sign Out</a></p> 
+                    <p><a href="login.html">Log Out</a></p> 
                 </div>
             </header>
             <div id="user-dashboard-body">
@@ -24,7 +24,7 @@
                     </div>
                     
                     <div id="user-info-display">
-                        <h3>User Information:</h3>
+                        <h3>User Information</h3>
                         <p><strong>nickname:</strong> Name1</p>
                         <p><strong>email:</strong> Name1@email.com</p>
                         <p><strong>date of birth:</strong> dd/mm/yyyy</p>
@@ -32,20 +32,22 @@
                     
                     <div id="user-update-section">
                         <h3>Update User Information</h3>
-                        <form>
+                        <form action="#" method="post" id="user-update-form">
                             <div class="form-group">
-                                <label>Nickname:</label>
-                                <input type="text" placeholder="">
+                                <label for="nickname">Nickname:</label>
+                                <input type="text" id="nickname" name="nickname" />
                             </div>
                             <div class="form-group">
-                                <label>Avatar:</label>
-                                <button type="button">Browse</button>
+                                <label for="avatar">Avatar:</label>
+                                <button type="button" id="avatar">Browse</button>
                             </div>
                             <div class="form-group">
-                                <label>Date of Birth (dd/mm/yy):</label>
-                                <input type="text" placeholder="">
+                                <label for="dob">Date of Birth (dd/mm/yy):</label>
+                                <input type="text" id="dob" name="dob" />
                             </div>
-                            <button type="submit" class="update-btn">Update</button>
+                            <div class="update-btn">
+                                <input type="submit" value="Update" />
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -55,6 +57,16 @@
                     <p><a href="gameHistory.html">Gaming History</a></p>
                 </div>
             </div>
+
+            <footer>
+                <a href="https://validator.w3.org/check?uri=http%3A%2F%2Fwww.webdev.cs.uregina.ca%2F%7Eizk251%2Fassignments%2FCS215IZ%2FuserInfo.html&charset=%28detect+automatically%29&doctype=XHTML+1.1&group=0&user-agent=W3C_Validator%2F1.3+" id="xhtml-validator">XHTML 1.1 Validator</a>
+                
+                <a href="https://jigsaw.w3.org/css-validator/check/referer" id="css-validator">
+                        <img style="border:0;width:88px;height:31px"
+                            src="https://jigsaw.w3.org/css-validator/images/vcss"
+                            alt="Valid CSS!" />
+                </a>
+            </footer>
         </div>
     </body>
 </html>
