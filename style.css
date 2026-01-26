@@ -70,6 +70,7 @@ header #user-options{
     display: grid;
     grid-template-columns: auto;
     row-gap: 15px;
+    width: 20vw;
 }
 .form-input div{
     display: grid;
@@ -80,10 +81,11 @@ header #user-options{
 .auth-form{
     border: 1px solid gray;
     border-radius: 10px;
-    padding: 20px;
+    padding: 30px 50px;
 }
 
 .form-submit-button{
+    margin-top: 20px;
     justify-self: center;
 }
 .form-submit-button input[type="submit"]{
@@ -96,6 +98,7 @@ header #user-options{
     display: grid;
     grid-template-columns: auto 30px auto;
     column-gap: 5px;
+    margin-top: 10px;
 }
 .form-note #sign-up{
     grid-column: 1/2;
