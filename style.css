@@ -212,6 +212,22 @@ header a{
     object-position: center;
 }
 
+.game-card{
+    display: grid;
+    grid-template-rows: auto max-content;
+    gap: 8px;
+
+    border-radius: 12px;
+
+    background-color: #002855;
+}
+
+.game-card p{
+    text-align: center;
+    margin: 8px 0px;
+    font-size: 18px;
+}
+
 /* game history formatting */
 
 #dashboard-game-history {
