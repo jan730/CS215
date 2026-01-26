@@ -7,10 +7,10 @@ body{
 }
 
 /*a global grid so header is the same across pages*/
-#global-formatting{
+.global-formatting{
     display: grid;
-    grid-template-rows: 50px 1fr;
-    /*50 px header, the rest is body*/
+    grid-template-rows: 50px 1fr 50px;
+    /*50 px header and footer, the rest is body*/
 
     min-height: 100vh;
 }
@@ -140,16 +140,18 @@ header a{
 
 
 /*dashboard formatting*/
-/* #dashboard-container{
-    
-} */
+#dashboard-container{
+    height: 100vh;
+}
 
-#dashboard-body{
+.dashboard-body{
+    overflow: auto;
+
     display: grid;
     grid-template-columns: 1fr auto 3fr auto 1fr;
     grid-template-rows: max-content 1fr max-content;
 
-    max-height: calc(100vh - 52px);
+    max-height: 100%;
     padding: 20px;
     gap: 20px;
 
