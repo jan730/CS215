@@ -1,25 +1,60 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Game History</title>
-        <link rel="stylesheet" type="text/css" href="style.css" />
-    </head>
-    <body>
-        <div id="global-formatting">
-            <header>
-                <div id="logo">
-                    <p>Logo here</p>
-                </div>
-                <div id="page-name">
-                    <p>Header</p>
-                </div>
-                <div id="user-options">
-                    <p>Log out</p> 
-                </div>
-            </header>
-            <div>
+<head>
+    <title>Gaming Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <div id="global-formatting">
+        <header>
+            <div id="logo">
+                <p>Logo here</p>
+            </div>
+            <div id="page-name">
+                <p>Game History Page</p>
+            </div>
+            <div id="user-options">
+                <p><a href="login.html">Log out</a></p>
+            </div>
+        </header>
 
+        <div id="dashboard-body">
+            <h1 id="dashboard-games-title">Game History</h1>
+            <h2 id="dashboard-my-account"><a href="userInfo.html">My Account</a></h2>
+
+            <div id="dashboard-game-history">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Game</th>
+                            <th>Opponent</th>
+                            <th>Result</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>12345</td>
+                            <td>PlayerX</td>
+                            <td>Win</td>
+                            <td>2024-06-01</td>
+                        </tr>
+                        <tr>
+                            <td>12346</td>
+                            <td>PlayerY</td>
+                            <td>Loss</td>
+                            <td>2024-06-02</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="dashboard-pagination">
+                <span>Page No.</span>
+                <button>&lt;</button>
+                <button>&gt;</button>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
