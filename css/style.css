@@ -450,3 +450,9 @@ footer #css-validator{
     grid-column: 3/4;
     justify-self: start;
 }
+
+/* Error/Validation styling */
+
+.invalid {
+    border: 2px solid rgb(255, 0, 0);
+}
