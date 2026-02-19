@@ -1,4 +1,4 @@
-let loginForm = document.getElementById("loginForm");
+let loginForm = document.getElementById("login-form");
 let email = document.getElementById("email");
 let password = document.getElementById("password");
 

@@ -3,6 +3,8 @@
     <head>
         <title>Signup</title>
         <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+        <script src="js/eventHandlers.js"></script>
     </head>
     <body>
         <div class="global-formatting">
@@ -27,18 +29,22 @@
                             <div>
                                 <label for="email">Email</label>
                                 <input type="email" id="email" name="email" />
+                                <span class="error" id="email-error"></span>
                             </div>
                             <div>
                                 <label for="nickname">Nickname</label>
                                 <input type="text" id="nickname" name="nickname" />
+                                <span class="error" id="nickname-error"></span>
                             </div>
                             <div>
                                 <label for="password">Password</label>
                                 <input type="password" id="password" name="password" />
+                                <span class="error" id="password-error"></span>
                             </div>
                             <div>
                                 <label for="cpassword">Confirm password</label>
                                 <input type="password" id="cpassword" name="cpassword" />
+                                <span class="error" id="cpassword-error"></span>
                             </div>
                         </div>
                         <div class="form-submit-button">
@@ -62,7 +68,6 @@
             </footer>
         </div>
         <script src="js/validation.js"></script>
-        <script src="js/eventHandlers.js"></script>
         <script src="js/signupEvents.js"></script>
     </body>
 </html>

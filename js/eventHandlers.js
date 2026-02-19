@@ -9,6 +9,17 @@ function emailBlurHandler(event) {
     }
 }
 
+function nicknameBlurHandler(event) {
+    let input = event.target;
+    let error = validateNickname(input.value);
+
+    if (error !== "") {
+        showError(input, error);
+    } else {
+        markValid(input);
+    }
+}
+
 function passwordBlurHandler(event) {
     let input = event.target;
     let error = validatePassword(input.value);
@@ -19,6 +30,20 @@ function passwordBlurHandler(event) {
         markValid(input);
     }
 }
+
+function confirmPasswordBlurHandler(event) {
+    let input = event.target;
+    let passwordInput = document.getElementById("password");
+    let error = validateConfirmPassword(passwordInput.value, input.value);
+
+    if (error !== "") {
+        showError(input, error);
+    } else {
+        markValid(input);
+    }
+}
+
+
 
 function loginSubmitHandler(event) {
     let emailInput = document.getElementById("email");
@@ -44,7 +69,7 @@ function signUpSubmitHandler(event) {
     let emailInput = document.getElementById("email");
     let nicknameInput = document.getElementById("nickname");
     let passwordInput = document.getElementById("password");
-    let confirmPasswordInput = document.getElementById("confirmPassword");
+    let confirmPasswordInput = document.getElementById("cpassword");
 
     // Run validators
     let emailError = validateEmail(emailInput.value);
