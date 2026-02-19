@@ -39,3 +39,51 @@ function loginSubmitHandler(event) {
         event.preventDefault();
     }
 }
+
+function signUpSubmitHandler(event) {
+    let emailInput = document.getElementById("email");
+    let nicknameInput = document.getElementById("nickname");
+    let passwordInput = document.getElementById("password");
+    let confirmPasswordInput = document.getElementById("confirmPassword");
+
+    // Run validators
+    let emailError = validateEmail(emailInput.value);
+    let nicknameError = validateNickname(nicknameInput.value);
+    let passwordError = validatePassword(passwordInput.value);
+    let confirmError = validateConfirmPassword(passwordInput.value, confirmPasswordInput.value);
+
+    // Show or clear errors
+    if (emailError !== "") {
+        showError(emailInput, emailError);
+    } else {
+        markValid(emailInput);
+    }
+
+    if (nicknameError !== "") {
+        showError(nicknameInput, nicknameError);
+    } else {
+        markValid(nicknameInput);
+    }
+
+    if (passwordError !== "") {
+        showError(passwordInput, passwordError);
+    } else {
+        markValid(passwordInput);
+    }
+
+    if (confirmError !== "") {
+        showError(confirmPasswordInput, confirmError);
+    } else {
+        markValid(confirmPasswordInput);
+    }
+
+    // Stop submission if any errors exist
+    if (
+        emailError !== "" ||
+        nicknameError !== "" ||
+        passwordError !== "" ||
+        confirmError !== ""
+    ) {
+        event.preventDefault();
+    }
+}
