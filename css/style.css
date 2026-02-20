@@ -373,7 +373,6 @@ header a{
 
 .form-group input {
     padding: 5px;
-    border: 1px solid #ccc;
     border-radius: 4px;
 }
 
@@ -383,6 +382,10 @@ header a{
     border: 1px solid black;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.form-group span.error {
+    grid-column: 1/3;
 }
 
 .update-btn {
@@ -455,4 +458,10 @@ footer #css-validator{
 
 .invalid {
     border: 2px solid rgb(255, 0, 0);
+}
+
+span.error {
+    color: rgb(255, 0, 0);
+    font-size: 12px;
+    justify-self: end;
 }
