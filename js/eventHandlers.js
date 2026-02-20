@@ -43,7 +43,27 @@ function confirmPasswordBlurHandler(event) {
     }
 }
 
+function avatarBlurHandler(event) {
+    let input = event.target;
+    let error = validateAvatarPath(input.value);
 
+    if (error !== "") {
+        showError(input, error);
+    } else {
+        markValid(input);
+    }
+}
+
+function dobBlurHandler(event) {
+    let input = event.target;
+    let error = validateDOB(input.value);
+
+    if (error !== "") {
+        showError(input, error);
+    } else {
+        markValid(input);
+    }
+}
 
 function loginSubmitHandler(event) {
     let emailInput = document.getElementById("email");
