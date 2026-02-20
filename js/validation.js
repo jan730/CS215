@@ -83,6 +83,11 @@ function validateAvatarPath(value) {
         return "Avatar path cannot be empty.";
     }
 
+    let pattern = /^[^\n]+\.[a-zA-Z]{3,4}$/;
+    if (!pattern.test(value)) {
+        return "Please enter a valid avatar filename (e.g., 'photo.jpg').";
+    }
+
     return "";
 }
 
