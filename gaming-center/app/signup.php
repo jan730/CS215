@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     $emailRegex = "/^[^\s@]+@[^\s@]+\.[^\s@]+$/";
     $nicknameRegex = "/^\w+$/";
-    $passwordRegex = "//"
+    $passwordRegex = "//";
 
     if(!preg_match($emailRegex, $email)) {
         $errors["email"] = "Invalid email";
@@ -55,11 +55,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     $query = $db->prepare("SELECT 1 FROM Users WHERE email = ?");
-    $query->bind_param('s', $email);    //replace the ? with $email, the 's' makes it string
-    $query->execute();
-    $result = $query->get_result();
+    $query->bindParam(1, $email, PDO::PARAM_STR);    //replace the ? with $email, the 's' makes it string
+    $result = $query->execute();
 
-    $match = $result->fetch();
+    if(!$result){
+        $errors["database error"] = "Could not retrieve user information";
+    }
+
+    $match = $query->fetch();
 
     if ($match) {
         $errors["account taken"] = "A user with that email already exists.";
@@ -70,9 +73,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $hashed_password = password_hash($password);
         //store info
         $query = $db->prepare("INSERT INTO Users (email, nickname, password) VALUES (?, ?, ?)"); //dob and avatar are null by default
-        $query->bind_param('sss', $email, $nickname, $hashed_password);    
-        $query->execute();
-        $result = $query->get_result();
+        $query->bindParam(1, $email, PDO::PARAM_STR);
+        $query->bindParam(2, $nickname, PDO::PARAM_STR);
+        $query->bindParam(3, $passhash, PDO::PARAM_STR);
+        $result = $query->execute();
 
         $db = null; //close connection
 
@@ -89,9 +93,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     //print error message
     if (!empty($errors)) {
-        foreach($errors as $type => $message) {
-            print("$type: $message \n<br />");
-        }
+        // foreach($errors as $type => $message) {
+        //     print("$type: $message \n<br />");
+        // }
+        $_SESSION["error"] = "Sign up failed";
+        header("Location: signup.php");
+        exit();
     }
 }
 ?>
@@ -144,6 +151,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 <span class="error" id="cpassword-error"></span>
                             </div>
                         </div>
+                        <?php
+                        if(isset($_SESSION["error"])){
+                        ?>
+                            <span id="session-error">
+                                <p> 
+                                    <?php
+                                    echo $_SESSION["error"];
+                                    unset($_SESSION["error"]);
+                                    ?>
+                                </p>
+                            </span>
+                        <?php
+                        }
+                        ?>
                         <div class="form-submit-button">
                             <input type="submit" value="Sign Up" />
                         </div>

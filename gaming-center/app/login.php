@@ -28,59 +28,62 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $password = test_input($_POST["password"]);
     }
 
-    try {
-		$db = new PDO($attr, $db_user, $db_pwd, $options);
-	} catch (PDOException $e) {
-        die("Connection failed: " . $e->getMessage());
-    }
+    if(empty($errors)){
+        try {
+            $db = new PDO($attr, $db_user, $db_pwd, $options);
+        } catch (PDOException $e) {
+            die("Connection failed: " . $e->getMessage());
+        }
 
-    //get the password hash
-    $query = $db->prepare("SELECT uid password FROM Users WHERE email = ?");
-    $query->bind_param('s', $email);    //replace the ? with $email, the 's' makes it string
-    $query->execute();
-    $result = $query->get_result(); //$result is the row containign the pass hash for the email
+        //get the password hash
+        $query = $db->prepare("SELECT uid password FROM Users WHERE email = ?");
+        $query->bindParam(1, $email, PDO::PARAM_STR);    //replace the ? with $email, the 's' makes it string
+        $result = $query->execute(); //$result is the row containign the pass hash for the email
+        //get_result is mysqli and not pdo?
 
-    if(!$result){
-        $errors["database error"] = "Could not retrieve user information";
-    } elseif($row = $result->fetch()){
-        //if there is a row get the password
-        $passhash = $row["password"];
+        if(!$result){
+            $errors["database error"] = "Could not retrieve user information";
+        } elseif($row = $query->fetch()){
+            //if there is a row get the password
+            $passhash = $row["password"];
 
-        //check if email and password are a valid match
+            //check if email and password are a valid match
 
-        //verify password
-        if(password_verify($password, $passhash)){
-            //the password is the same as the one stored in db after the hash
+            //verify password
+            if(password_verify($password, $passhash)){
+                //the password is the same as the one stored in db after the hash
 
-            //store the user id in the session
-            $_SESSION["uid"] = $row["uid"]
+                //store the user id in the session
+                $_SESSION["uid"] = $row["uid"];
 
-            //disconnect db
-            $db = null;
+                //disconnect db
+                $db = null;
 
-            //move to dashboard
-            header("Location: dashboard.php");
-            exit();
+                //move to dashboard
+                header("Location: dashboard.php");
+                exit();
+            } else{
+                //email will always be correct if it gets to this step though?
+                $errors["login"] = "incorrect email or password";
+            }
+            
+
         } else{
-            //email will always be correct if it gets to this step though?
             $errors["login"] = "incorrect email or password";
         }
-        
 
-    } else{
-        $errors["login"] = "incorrect email or password";
+        $db = null; //close db
     }
-
-    $db = null; //close db
 
     //print error message
     if (!empty($errors)) {
-        foreach($errors as $type => $message) {
-            print("$type: $message \n<br />");
-        }
+        // foreach($errors as $type => $message) {
+        //     print("$type: $message \n<br />");
+        // }
+        $_SESSION["error"] = "Login failed";
+        header("Location: login.php");
+        exit();
     }
-
-
 }
 ?>
 <!DOCTYPE html>
@@ -109,6 +112,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <h2>Log In</h2>
                     </div>
                     <form id="login-form" action="login.php" method="post" class="auth-form">
+                        <?php
+                        if(isset($_SESSION["error"])){
+                        ?>
+                            <p id="session-error"> 
+                                <?php
+                                echo $_SESSION["error"];
+                                unset($_SESSION["error"]);
+                                ?>
+                            </p>
+                        <?php
+                        }
+                        ?>
                         <div class="form-input">
                             <div>
                                 <label for="email">Email</label>
