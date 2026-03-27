@@ -70,7 +70,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     //if there are no errors
     if(empty($errors)){
-        $hashed_password = password_hash($password);
+        $passhash = password_hash($password, PASSWORD_DEFAULT);
         //store info
         $query = $db->prepare("INSERT INTO Users (email, nickname, password) VALUES (?, ?, ?)"); //dob and avatar are null by default
         $query->bindParam(1, $email, PDO::PARAM_STR);

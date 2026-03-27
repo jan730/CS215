@@ -36,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
 
         //get the password hash
-        $query = $db->prepare("SELECT uid password FROM Users WHERE email = ?");
+        $query = $db->prepare("SELECT uid, password FROM Users WHERE email = ?");
         $query->bindParam(1, $email, PDO::PARAM_STR);    //replace the ? with $email, the 's' makes it string
         $result = $query->execute(); //$result is the row containign the pass hash for the email
         //get_result is mysqli and not pdo?
@@ -77,12 +77,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     //print error message
     if (!empty($errors)) {
-        // foreach($errors as $type => $message) {
-        //     print("$type: $message \n<br />");
-        // }
-        $_SESSION["error"] = "Login failed";
-        header("Location: login.php");
-        exit();
+        foreach($errors as $type => $message) {
+            print("$type: $message \n<br />");
+        }
+        // $_SESSION["error"] = "Login failed";
+        // header("Location: login.php");
+        // exit();
     }
 }
 ?>
