@@ -77,12 +77,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     //print error message
     if (!empty($errors)) {
-        foreach($errors as $type => $message) {
-            print("$type: $message \n<br />");
-        }
-        // $_SESSION["error"] = "Login failed";
-        // header("Location: login.php");
-        // exit();
+        // foreach($errors as $type => $message) {
+        //     print("$type: $message \n<br />");
+        // }
+        $_SESSION["error"] = "Login failed";
+        header("Location: login.php");
+        exit();
     }
 }
 ?>
