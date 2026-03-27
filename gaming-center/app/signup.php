@@ -129,6 +129,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <h2>Sign Up</h2>
                     </div>
                     <form id="signup-form" action="" method="post" class="auth-form">
+                        <?php
+                        if(isset($_SESSION["error"])){
+                        ?>
+                            <p id="session-error"> 
+                                <?php
+                                echo $_SESSION["error"];
+                                unset($_SESSION["error"]);
+                                ?>
+                            </p>
+                        <?php
+                        }
+                        ?>
                         <div class="form-input">
                             <div>
                                 <label for="email">Email</label>
@@ -151,20 +163,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 <span class="error" id="cpassword-error"></span>
                             </div>
                         </div>
-                        <?php
-                        if(isset($_SESSION["error"])){
-                        ?>
-                            <span id="session-error">
-                                <p> 
-                                    <?php
-                                    echo $_SESSION["error"];
-                                    unset($_SESSION["error"]);
-                                    ?>
-                                </p>
-                            </span>
-                        <?php
-                        }
-                        ?>
                         <div class="form-submit-button">
                             <input type="submit" value="Sign Up" />
                         </div>
