@@ -1,3 +1,100 @@
+<?php
+require_once("db.php");
+
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+$errors = array();
+$email = "";
+$nickname = "";
+$password = "";
+
+//if you got here by post by submitting this form
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    //make sure the info is not empty and test
+    if (empty($_POST["email"])) {
+        $errors["empty email"] = "Email is required";
+    } else {
+        $email = test_input($_POST["email"]);
+    }
+
+    if (empty($_POST["nickname"])) {
+        $errors["empty nickname"] = "Nickname is required";
+    } else {
+        $nickname = test_input($_POST["nickname"]);
+    }
+
+    if (empty($_POST["password"])) {
+        $errors["empty password"] = "Password is required";
+    } else {
+        $password = test_input($_POST["password"]);
+    }
+
+    $emailRegex = "/^[^\s@]+@[^\s@]+\.[^\s@]+$/";
+    $nicknameRegex = "/^\w+$/";
+    $passwordRegex = "//"
+
+    if(!preg_match($emailRegex, $email)) {
+        $errors["email"] = "Invalid email";
+    }
+    if(!preg_match($nicknameRegex, $nickname)) {
+        $errors["nickname"] = "Invalid nickname";
+    }
+    if(!preg_match($passwordRegex, $password)) {
+        $errors["password"] = "Invalid password";
+    }
+
+    try {
+		$db = new PDO($attr, $db_user, $db_pwd, $options);
+	} catch (PDOException $e) {
+        die("Connection failed: " . $e->getMessage());
+    }
+
+    $query = $db->prepare("SELECT 1 FROM Users WHERE email = ?");
+    $query->bind_param('s', $email);    //replace the ? with $email, the 's' makes it string
+    $query->execute();
+    $result = $query->get_result();
+
+    $match = $result->fetch();
+
+    if ($match) {
+        $errors["account taken"] = "A user with that email already exists.";
+    }
+
+    //if there are no errors
+    if(empty($errors)){
+        $hashed_password = password_hash($password);
+        //store info
+        $query = $db->prepare("INSERT INTO Users (email, nickname, password) VALUES (?, ?, ?)"); //dob and avatar are null by default
+        $query->bind_param('sss', $email, $nickname, $hashed_password);    
+        $query->execute();
+        $result = $query->get_result();
+
+        $db = null; //close connection
+
+        if(!$result){
+            $errors["user insert"] = "Failed to insert user";
+        } else{
+            //go to login after successful account setup
+            header("Location: login.php");
+            exit();
+        }
+    }
+    
+    $db = null; //still want to close connection if there are errors
+
+    //print error message
+    if (!empty($errors)) {
+        foreach($errors as $type => $message) {
+            print("$type: $message \n<br />");
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,7 +113,7 @@
                     <p>Sign Up</p>
                 </div>
                 <div id="user-options">
-                    <a href="login.html">Log In</a>
+                    <a href="login.php">Log In</a>
                 </div>
             </header>
             <div id="container">
@@ -24,7 +121,7 @@
                     <div class="form-title">
                         <h2>Sign Up</h2>
                     </div>
-                    <form id="signup-form" action="login.html" method="post" class="auth-form">
+                    <form id="signup-form" action="" method="post" class="auth-form">
                         <div class="form-input">
                             <div>
                                 <label for="email">Email</label>
@@ -52,7 +149,7 @@
                         </div>
                     </form>
                     <div class="form-note">
-                        <a href="login.html" id="log-in">Already have an account?</a>
+                        <a href="login.php" id="log-in">Already have an account?</a>
                     </div>    
                 </main>
             </div>

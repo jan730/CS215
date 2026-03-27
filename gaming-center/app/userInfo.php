@@ -8,13 +8,13 @@
         <div class="global-formatting">
             <header>
                 <div id="logo">
-                    <a href="dashboard.html">Logo here</a>
+                    <a href="dashboard.php">Logo here</a>
                 </div>
                 <div id="page-name">
                     <p>User Dashboard</p>
                 </div>
                 <div id="user-options">
-                    <p><a href="login.html">Log Out</a></p> 
+                    <p><a href="login.php">Log Out</a></p> 
                 </div>
             </header>
             <div id="user-dashboard-body">
@@ -57,7 +57,7 @@
                 
                 <div id="user-dashboard-footer">
                     <p><a href="#">Delete Account</a></p>
-                    <p><a href="gameHistory.html">Gaming History</a></p>
+                    <p><a href="gameHistory.php">Gaming History</a></p>
                 </div>
             </div>
 

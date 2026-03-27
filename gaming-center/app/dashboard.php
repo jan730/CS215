@@ -8,19 +8,19 @@
         <div class="global-formatting" id="dashboard-container">
             <header>
                 <div id="logo">
-                    <a href="dashboard.html">Logo here</a>
+                    <a href="dashboard.php">Logo here</a>
                 </div>
                 <div id="page-name">
                     <p>Game Dashboard</p>
                 </div>
                 <div id="user-options">
-                    <p><a href="login.html">Log out</a></p> 
+                    <p><a href="login.php">Log out</a></p> 
                 </div>
             </header>
             <!-- <div id="dashboard-container"> -->
             <div class="dashboard-body">
                     <h1 id="dashboard-games-title">Games</h1>
-                    <div id="dashboard-my-account"><a href="userInfo.html">My Account</a></div>
+                    <div id="dashboard-my-account"><a href="userInfo.php">My Account</a></div>
 
                     <div id="dashboard-games-display">
 
