@@ -44,7 +44,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $errors["nickname"] = "Invalid nickname";
     }
     //mb_strlen() is len of str in chars
-    if($password == ""||mb_strlen($password) < 6||!preg_match(/[^A-Za-z]/, $password)||preg_match(/\s/, $password)) {
+    if($password == ""||strlen($password) < 6||!preg_match("/[^A-Za-z]/", $password)||preg_match("/\s/", $password)) {
         $errors["password"] = "Invalid password";
     }
 
