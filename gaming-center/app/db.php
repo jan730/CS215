@@ -2,7 +2,7 @@
     $db_host = "localhost";
 
 	$db_user = "izk251";  // DB username
-	$db_pwd = "PWD"; // Enter your MySQL password here
+	$db_pwd = "pwd"; // Enter your MySQL password here
 	$db_db = "izk251"; // Database name
 
 	$charset = 'utf8mb4';
