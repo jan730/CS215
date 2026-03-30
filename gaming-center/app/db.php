@@ -1,10 +1,9 @@
 <?php
-	//you need the docker setup to run this
-    $db_host = "gaming-center_db";
+    $db_host = "localhost";
 
-	$db_user = getenv('MARIADB_USER');  
-	$db_pwd = getenv('MARIADB_PASSWORD'); 
-	$db_db = getenv('MARIADB_DATABASE');
+	$db_user = "izk251";  // DB username
+	$db_pwd = "PWD"; // Enter your MySQL password here
+	$db_db = "izk251"; // Database name
 
 	$charset = 'utf8mb4';
 	$attr = "mysql:host=$db_host;dbname=$db_db;charset=$charset";
@@ -12,6 +11,7 @@
 		PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
 		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 		PDO::ATTR_EMULATE_PREPARES   => false,
+		
 	];
 
 	try {
