@@ -43,7 +43,7 @@ if(!isset($_SESSION["uid"])){
     $errors["uid"] = "User not found";
 } else{
     $uid = $_SESSION["uid"];
-    $query = $db->prepare("SELECT nickname, email, dob, avatar_path  FROM Users WHERE uid = ?");
+    $query = $db->prepare("SELECT nickname, email, dob, avatar_path FROM Users WHERE uid = ?");
     $query->bindParam(1, $uid, PDO::PARAM_INT);
     $result = $query->execute();
 
@@ -61,6 +61,24 @@ if(!isset($_SESSION["uid"])){
 
 //update info if by post
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    //delete user delete was pressed
+    //delete account and return to login if delete account is confirmed
+    if (isset($_POST['delete'])) {
+        $query = $db->prepare("DELETE FROM Users WHERE uid=?");
+        $query->bindParam(1, $uid, PDO::PARAM_INT);
+        $result = $query->execute();
+
+        if(!$result){
+            $errors["database error"] = "Could not delete user information";
+        } else{
+            session_destroy();
+            header("Location: login.php");
+            exit();
+        }
+    }
+
+    //if update user info instead
     $nicknameRegex = "/^\w+$/";
     $avatarRegex = "/^[^\n]+\.[a-zA-Z]{3,4}$/";
 
@@ -246,7 +264,10 @@ if (!empty($errors)) {
                 </div>
                 
                 <div id="user-dashboard-footer">
-                    <p><a href="#">Delete Account</a></p>
+                    <!-- <p><a href="userInfo.php">Delete Account</a></p> -->
+                    <form method="POST" onsubmit="return confirm('Are you sure you want to delete your account?');">
+                        <button type="submit" name="delete">Delete Account?</button>
+                    </form>
                     <p><a href="gameHistory.php">Gaming History</a></p>
                 </div>
             </div>
