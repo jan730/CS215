@@ -310,6 +310,13 @@ header a{
     grid-row: 1/2;
 }
 
+#user-image-section img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 #user-info-display {
     border: 2px solid #0466C8;
     border-radius: 8px;

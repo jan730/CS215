@@ -36,7 +36,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     $emailRegex = "/^[^\s@]+@[^\s@]+\.[^\s@]+$/";
     $nicknameRegex = "/^\w+$/";
-    $passwordRegex = "//";
 
     if(!preg_match($emailRegex, $email)) {
         $errors["email"] = "Invalid email";
@@ -44,7 +43,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(!preg_match($nicknameRegex, $nickname)) {
         $errors["nickname"] = "Invalid nickname";
     }
-    if(!preg_match($passwordRegex, $password)) {
+    //mb_strlen() is len of str in chars
+    if($password == ""||mb_strlen($password) < 6||!preg_match(/[^A-Za-z]/, $password)||preg_match(/\s/, $password)) {
         $errors["password"] = "Invalid password";
     }
 
