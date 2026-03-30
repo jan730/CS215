@@ -153,9 +153,12 @@ $db = null;
 //display error if there are errors
 if (!empty($errors)) {
     //temp
-    foreach($errors as $type => $message) {
-        print("$type: $message \n<br />");
-    }
+    // foreach($errors as $type => $message) {
+    //     print("$type: $message \n<br />");
+    // }
+    $_SESSION["error"] = "Update failed";
+    header("Location: userInfo.php");
+    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -207,6 +210,18 @@ if (!empty($errors)) {
                     
                     <div id="user-update-section">
                         <h3>Update User Information</h3>
+                        <?php
+                        if(isset($_SESSION["error"])){
+                        ?>
+                            <p id="session-error"> 
+                                <?php
+                                echo $_SESSION["error"];
+                                unset($_SESSION["error"]);
+                                ?>
+                            </p>
+                        <?php
+                        }
+                        ?>
                         <form action="" method="post" id="user-update-form" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="nickname">Nickname:</label>
