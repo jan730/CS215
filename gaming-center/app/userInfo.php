@@ -1,8 +1,10 @@
 <?php
-//redirect to login if not logged in?
-//not a requirement for this assignment and might be used for marking so ill skip for now?
-
+//required to be logged in to view this page
 session_start();
+if (!isset($_SESSION["uid"])) {
+    header("Location: login.php");
+    exit();
+}
 
 //want to query db for nickname, avatar, date of birth
 //maybe email as well since we display it on the page
@@ -135,6 +137,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         if(!$result){
             $errors["update failed"] = "Failed to update user info";
+        } else{
+            //disconnect db and reload page
+            $db = null;
+
+            header("Location: userInfo.php");
+            exit();
         }
     }
 }
@@ -166,7 +174,7 @@ if (!empty($errors)) {
                     <p>User Dashboard</p>
                 </div>
                 <div id="user-options">
-                    <p><a href="login.php">Log Out</a></p> 
+                    <p><a href="logout.php">Log Out</a></p> 
                 </div>
             </header>
             <div id="user-dashboard-body">

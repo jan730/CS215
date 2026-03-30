@@ -1,3 +1,11 @@
+<?php
+//required to be logged in to view this page
+session_start();
+if (!isset($_SESSION["uid"])) {
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +22,7 @@
                     <p>Game Dashboard</p>
                 </div>
                 <div id="user-options">
-                    <p><a href="login.php">Log out</a></p> 
+                    <p><a href="logout.php">Log out</a></p> 
                 </div>
             </header>
             <!-- <div id="dashboard-container"> -->
