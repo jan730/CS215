@@ -27,9 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!preg_match($nicknameRegex, $nickname)) {
         $errors[] = "Invalid nickname";
     }
-    $inputDate = new DateTime($dob);
-    $currentDate = new DateTime();
-    if ($dob == "" || $inputDate > $currentDate) {
+    try {
+        $inputDate = new DateTime($dob);
+        $currentDate = new DateTime();
+
+        if ($dob == "" || $inputDate > $currentDate) {
+            $errors[] = "Invalid date";
+        }
+    } catch (Exception $e) {
         $errors[] = "Invalid date";
     }
 
@@ -83,8 +88,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         else{
             //if !uploadok
-            $errors["Server Error"] = "Uploak not okay";
+            $errors["Server Error"] = "Upload not okay";
         }
+    }
+    else{
+        $errors["unset avatar"] = "avatar is not set";
     }
 
     if (empty($errors)) {
@@ -94,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $query = $db->prepare("UPDATE Users SET nickname = ?, dob = ?, avatar_path = ? WHERE uid = ?");
             $query->bindParam(1, $nickname, PDO::PARAM_STR);
             $query->bindParam(2, $dob, PDO::PARAM_STR);
-            $query->bindParam(3, $avatar, PDO::PARAM_STR);
+            $query->bindParam(3, $avatar_path, PDO::PARAM_STR);
             $query->bindParam(4, $uid, PDO::PARAM_INT);
             $result = $query->execute();
 

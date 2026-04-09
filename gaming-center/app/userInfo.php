@@ -201,7 +201,7 @@ if (!empty($errors)) {
             <div id="user-dashboard-body">
                 <div id="user-dashboard-container">
                     <div id="user-image-section">
-                        <img id="avatar-image" src="<?= $avatar_path ?: 'images/1.png' ?>" />
+                        <img id="avatar-image" src="<?= $avatar_path ? $avatar_path: 'uploads/1.png' ?>" />
                     </div>
                     
                     <div id="user-info-display">

@@ -144,7 +144,7 @@ function userInfoSubmitHandler(event) {
     let formData = new FormData();
 
     let nicknameError = validateNickname(nicknameInput.value);
-    let avatarError = validateAvatarPath(avatarInput.files[0]);
+    let avatarError = validateAvatarPath(avatarInput.value);
     let dobError = validateDOB(dobInput.value);
 
     if (nicknameError !== "") {
