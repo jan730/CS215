@@ -50,7 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $result = $query->execute();
 
             if ($result) {
-                echo json_encode(['success' => true, 'message' => 'Updated successfully']);
+                echo json_encode([
+                    'success' => true, 
+                    'message' => 'Updated successfully',
+                    'nickname' => $nickname,
+                    'avatar' => $avatar,
+                    'dob' => $dob
+                ]);
             } else {
                 echo json_encode(['success' => false, 'message' => 'Update failed']);
             }

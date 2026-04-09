@@ -201,29 +201,23 @@ if (!empty($errors)) {
             <div id="user-dashboard-body">
                 <div id="user-dashboard-container">
                     <div id="user-image-section">
-                        <?php
-                        if($avatar_path == null){
-                            echo "<p>image not found</p>";
-                        } else{
-                            echo "<img src='" . $avatar_path . "' />";
-                        }
-                        ?>
+                        <img id="avatar-image" src="<?= $avatar_path ?: 'images/1.png' ?>" />
                     </div>
                     
                     <div id="user-info-display">
                         <h3>User Information</h3>
-                        <p>
+                        <div id="nickname-display">
                             <strong>nickname: </strong>
-                            <?= $nickname ? $nickname : 'nickname not found' ?>
-                        </p>
-                        <p>
+                            <span id="nickname-value"><?= $nickname ? htmlspecialchars($nickname) : 'nickname not found' ?></span>
+                        </div>
+                        <div id="email-display">
                             <strong>email: </strong>
-                            <?= $email ? $email : 'email not found' ?>
-                        </p>
-                        <p>
+                            <span id="email-value"><?= $email ? htmlspecialchars($email) : 'email not found' ?></span>
+                        </div>
+                        <div id="dob-display">
                             <strong>date of birth: </strong>
-                            <?= $dob ? $dob : 'date of birth not found' ?>
-                        </p>
+                            <span id="dob-value"><?= $dob ? htmlspecialchars($dob) : 'date of birth not found' ?></span>
+                        </div>
                     </div>
                     
                     <div id="user-update-section">
@@ -240,8 +234,7 @@ if (!empty($errors)) {
                         <?php
                         }
                         ?>
-                        <div id="update-success" class="hidden">Updated successfully!</div>
-                        <div id="update-error" class="hidden"></div>
+                        <div id="update-result" class="hidden"></div>
                         <form action="" method="post" id="user-update-form" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="nickname">Nickname:</label>

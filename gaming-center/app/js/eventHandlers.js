@@ -170,16 +170,39 @@ function userInfoSubmitHandler(event) {
     let xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            let response = JSON.parse(xhr.responseText);
-            if (response.success) {
-                document.getElementById("update-success").classList.remove("hidden");
-                document.getElementById("update-error").classList.add("hidden");
+        if (xhr.readyState === 4) {
+            let resultDiv = document.getElementById("update-result");
+            resultDiv.classList.remove("hidden", "update-success", "update-error");
+
+            if (xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    resultDiv.textContent = response.message || "Updated successfully!";
+                    resultDiv.classList.add("update-success");
+                } else {
+                    resultDiv.textContent = response.message || "Failed to update information.";
+                    resultDiv.classList.add("update-error");
+                }
+
+                let nicknameValue = document.getElementById("nickname-value");
+                let dobValue = document.getElementById("dob-value");
+                let avatarImage = document.getElementById("avatar-image");
+
+                if (nicknameValue && response.nickname) {
+                    nicknameValue.textContent = response.nickname;
+                }
+                if (dobValue && response.dob) {
+                    dobValue.textContent = response.dob;
+                }
+                if (avatarImage && response.avatar) {
+                    avatarImage.src = response.avatar;
+                }
             } else {
-                document.getElementById("update-error").textContent = response.message;
-                document.getElementById("update-error").classList.remove("hidden");
-                document.getElementById("update-success").classList.add("hidden");
+                resultDiv.textContent = "Update request failed. Please try again.";
+                resultDiv.classList.add("update-error");
             }
+
+            resultDiv.classList.remove("hidden");
         }
     };
 

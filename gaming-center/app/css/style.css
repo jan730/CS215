@@ -318,6 +318,10 @@ header a{
 }
 
 #user-info-display {
+    display: grid;
+    grid-template-rows: auto auto auto;
+    gap: 2.5px;
+
     border: 2px solid #0466C8;
     border-radius: 8px;
 
@@ -484,6 +488,31 @@ span.error {
     margin-top: 0px;
 }
 
+/* User Info Update Results */
+#update-result {
+    font-size: 16px;
+    justify-self: center;
+    margin-top: 10px;
+}
+
 .hidden {
     display: none;
+}
+
+.update-error {
+    color: red;
+    font-size: 20px;
+    font-weight: 700;
+    justify-self: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.update-success {
+    color: lime;
+    font-size: 20px;
+    font-weight: 700;
+    justify-self: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
