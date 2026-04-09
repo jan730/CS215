@@ -17,13 +17,11 @@ function test_input($data) {
 $errors = [];
 $uid = $_SESSION["uid"];
 
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $nickname = test_input($_GET["nickname"] ?? '');
-    $avatar = test_input($_GET["avatar"] ?? '');
-    $dob = test_input($_GET["dob"] ?? '');
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nickname = test_input($_POST["nickname"] ?? '');
+    $dob = test_input($_POST["dob"] ?? '');
 
     $nicknameRegex = "/^\w+$/";
-    $avatarRegex = "/^[^\n]+\.[a-zA-Z]{3,4}$/";
 
     // Validate input
     if (!preg_match($nicknameRegex, $nickname)) {
@@ -34,8 +32,59 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if ($dob == "" || $inputDate > $currentDate) {
         $errors[] = "Invalid date";
     }
-    if (!preg_match($avatarRegex, $avatar)) {
-        $errors[] = "Invalid avatar path";
+
+
+    //avatar validation
+    $avatar_path = "";
+    $avatarRegex = "/^[^\n]+\.[a-zA-Z]{3,4}$/";
+
+    if(isset($_FILES["avatar"])){
+        $target_dir = "uploads/";
+        $uploadOk = TRUE;
+
+        $imageFileType = strtolower(pathinfo($_FILES["avatar"]["name"],PATHINFO_EXTENSION));
+        
+        $avatar_path = $target_dir . $uid . "." . $imageFileType;
+
+        //just replace it when we move?
+        //remove old avatar if it exists
+        // if (file_exists($avatar_path)) {
+        //     unlink($avatar_path); // delete old file
+        // }
+
+        if (!preg_match($avatarRegex, $avatar_path)) {
+            $errors[] = "Invalid avatar";
+            $uploadOk = FALSE;
+        }
+
+        // Check whether the file is not too large
+        if ($_FILES["avatar"]["size"] > 1000000) {
+            $errors["avatar"] = "File is too large. Maximum 1MB. ";
+            $uploadOk = FALSE;
+        }
+
+        // Check image file type
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" ) {
+            $errors["avatar_path"] = "Bad image type. Only JPG, JPEG, PNG & GIF files are allowed. ";
+            $uploadOk = FALSE;
+        }
+
+        // Check if $uploadOk still TRUE after validations
+        if ($uploadOk) {
+            // Move the user's avatar to the uploads directory and capture the result as $fileStatus.
+            $fileStatus = move_uploaded_file($_FILES["avatar"]["tmp_name"], $avatar_path);
+
+            // Check $fileStatus:
+            if (!$fileStatus) {
+                // The user's avatar file could not be moved
+                $errors["Server Error"] = "Failed to upload image";
+                $uploadOk = FALSE;
+            }
+        }
+        else{
+            //if !uploadok
+            $errors["Server Error"] = "Uploak not okay";
+        }
     }
 
     if (empty($errors)) {
@@ -54,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     'success' => true, 
                     'message' => 'Updated successfully',
                     'nickname' => $nickname,
-                    'avatar' => $avatar,
+                    'avatar' => $avatar_path,
                     'dob' => $dob
                 ]);
             } else {

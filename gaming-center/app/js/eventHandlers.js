@@ -134,12 +134,17 @@ function signUpSubmitHandler(event) {
 }
 
 function userInfoSubmitHandler(event) {
+    event.preventDefault();
+
     let nicknameInput = document.getElementById("nickname");
     let avatarInput = document.getElementById("avatar");
     let dobInput = document.getElementById("dob");
 
+    //for post
+    let formData = new FormData();
+
     let nicknameError = validateNickname(nicknameInput.value);
-    let avatarError = validateAvatarPath(avatarInput.value);
+    let avatarError = validateAvatarPath(avatarInput.files[0]);
     let dobError = validateDOB(dobInput.value);
 
     if (nicknameError !== "") {
@@ -161,11 +166,16 @@ function userInfoSubmitHandler(event) {
     }
 
     if (nicknameError !== "" || avatarError !== "" || dobError !== "") {
-        event.preventDefault();
         return;
     }
 
-    event.preventDefault();
+    formData.append("nickname", nicknameInput.value);
+    formData.append("dob", dobInput.value);
+
+    if (avatarInput.files[0]) {
+        formData.append("avatar", avatarInput.files[0]);
+    }
+
 
     let xhr = new XMLHttpRequest();
 
@@ -179,23 +189,23 @@ function userInfoSubmitHandler(event) {
                 if (response.success) {
                     resultDiv.textContent = response.message || "Updated successfully!";
                     resultDiv.classList.add("update-success");
+
+                    let nicknameValue = document.getElementById("nickname-value");
+                    let dobValue = document.getElementById("dob-value");
+                    let avatarImage = document.getElementById("avatar-image");
+
+                    if (nicknameValue && response.nickname) {
+                        nicknameValue.textContent = response.nickname;
+                    }
+                    if (dobValue && response.dob) {
+                        dobValue.textContent = response.dob;
+                    }
+                    if (avatarImage && response.avatar) {
+                        avatarImage.src = response.avatar;
+                    }
                 } else {
                     resultDiv.textContent = response.message || "Failed to update information.";
                     resultDiv.classList.add("update-error");
-                }
-
-                let nicknameValue = document.getElementById("nickname-value");
-                let dobValue = document.getElementById("dob-value");
-                let avatarImage = document.getElementById("avatar-image");
-
-                if (nicknameValue && response.nickname) {
-                    nicknameValue.textContent = response.nickname;
-                }
-                if (dobValue && response.dob) {
-                    dobValue.textContent = response.dob;
-                }
-                if (avatarImage && response.avatar) {
-                    avatarImage.src = response.avatar;
                 }
             } else {
                 resultDiv.textContent = "Update request failed. Please try again.";
@@ -206,9 +216,7 @@ function userInfoSubmitHandler(event) {
         }
     };
 
-    xhr.open("GET", "ajaxProcessor.php?nickname=" + encodeURIComponent(nicknameInput.value) 
-    + "&avatar=" + encodeURIComponent(avatarInput.value) 
-    + "&dob=" + encodeURIComponent(dobInput.value), true);
+    xhr.open("POST", "ajaxProcessor.php", true);
     
-    xhr.send();
+    xhr.send(formData);
 }

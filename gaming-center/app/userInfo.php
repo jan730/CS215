@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             exit();
         }
     }
-
+    /*
     //if update user info instead
     $nicknameRegex = "/^\w+$/";
     $avatarRegex = "/^[^\n]+\.[a-zA-Z]{3,4}$/";
@@ -139,9 +139,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Check $fileStatus:
         if (!$fileStatus) {
             // The user's avatar file could not be moved
-            // To Do 9a: add a suitable error message to errors array be displayed on the page
             $errors["Server Error"] = "Failed to upload image";
-            $uploadOK = FALSE;
+            $uploadOk = FALSE;
         }
     }
     
@@ -163,6 +162,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             exit();
         }
     }
+    */
 }
 
 //close connection
