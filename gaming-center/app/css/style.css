@@ -483,3 +483,7 @@ span.error {
 
     margin-top: 0px;
 }
+
+.hidden {
+    display: none;
+}

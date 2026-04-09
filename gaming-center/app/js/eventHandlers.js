@@ -160,6 +160,11 @@ function userInfoSubmitHandler(event) {
         markValid(dobInput);
     }
 
+    if (nicknameError !== "" || avatarError !== "" || dobError !== "") {
+        event.preventDefault();
+        return;
+    }
+
     event.preventDefault();
 
     let xhr = new XMLHttpRequest();
@@ -167,13 +172,18 @@ function userInfoSubmitHandler(event) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
-            console.log("AJAX success", response);
-        } else {
-            console.error("AJAX failed", xhr.status, xhr.statusText);
+            if (response.success) {
+                document.getElementById("update-success").classList.remove("hidden");
+                document.getElementById("update-error").classList.add("hidden");
+            } else {
+                document.getElementById("update-error").textContent = response.message;
+                document.getElementById("update-error").classList.remove("hidden");
+                document.getElementById("update-success").classList.add("hidden");
+            }
         }
     };
 
-    xhr.open("GET", "update_user_info.php?nickname=" + encodeURIComponent(nicknameInput.value) 
+    xhr.open("GET", "ajaxProcessor.php?nickname=" + encodeURIComponent(nicknameInput.value) 
     + "&avatar=" + encodeURIComponent(avatarInput.value) 
     + "&dob=" + encodeURIComponent(dobInput.value), true);
     

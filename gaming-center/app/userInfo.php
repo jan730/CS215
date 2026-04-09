@@ -240,6 +240,8 @@ if (!empty($errors)) {
                         <?php
                         }
                         ?>
+                        <div id="update-success" class="hidden">Updated successfully!</div>
+                        <div id="update-error" class="hidden"></div>
                         <form action="" method="post" id="user-update-form" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="nickname">Nickname:</label>
@@ -248,7 +250,7 @@ if (!empty($errors)) {
                             </div>
                             <div class="form-group">
                                 <label for="avatar">Avatar:</label>
-                                <input type="file" accept="image/*" id="avatar" name="avatar" ></input>
+                                <input type="file" accept="image/*" id="avatar" name="avatar" />
                                 <span class="error" id="avatar-error"></span>
                             </div>
                             <div class="form-group">
