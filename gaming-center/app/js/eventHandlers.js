@@ -138,6 +138,27 @@ function userInfoSubmitHandler(event) {
     let avatarInput = document.getElementById("avatar");
     let dobInput = document.getElementById("dob");
 
+    let nicknameError = validateNickname(nicknameInput.value);
+    let avatarError = validateAvatarPath(avatarInput.value);
+    let dobError = validateDOB(dobInput.value);
+
+    if (nicknameError !== "") {
+        showError(nicknameInput, nicknameError);
+    } else {
+        markValid(nicknameInput);
+    }
+
+    if (avatarError !== "") {
+        showError(avatarInput, avatarError);
+    } else {
+        markValid(avatarInput);
+    }
+
+    if (dobError !== "") {
+        showError(dobInput, dobError);
+    } else {
+        markValid(dobInput);
+    }
 
     event.preventDefault();
 
