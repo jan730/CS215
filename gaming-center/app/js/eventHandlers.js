@@ -136,6 +136,8 @@ function signUpSubmitHandler(event) {
 function userInfoSubmitHandler(event) {
     event.preventDefault();
 
+    let xhr = new XMLHttpRequest();
+
     let nicknameInput = document.getElementById("nickname");
     let avatarInput = document.getElementById("avatar");
     let dobInput = document.getElementById("dob");
@@ -165,4 +167,10 @@ function userInfoSubmitHandler(event) {
     if (nicknameError !== "" || avatarError !== "" || dobError !== "") {
         event.preventDefault();
     }
+
+    xhr.open("GET", "update_user_info.php?nickname=" + encodeURIComponent(nicknameInput.value) 
+    + "&avatar=" + encodeURIComponent(avatarInput.value) 
+    + "&dob=" + encodeURIComponent(dobInput.value), true);
+    
+    xhr.send();
 }
