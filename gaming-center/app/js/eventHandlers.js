@@ -134,6 +134,8 @@ function signUpSubmitHandler(event) {
 }
 
 function userInfoSubmitHandler(event) {
+    event.preventDefault();
+
     let nicknameInput = document.getElementById("nickname");
     let avatarInput = document.getElementById("avatar");
     let dobInput = document.getElementById("dob");
