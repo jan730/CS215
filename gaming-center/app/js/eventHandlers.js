@@ -134,39 +134,23 @@ function signUpSubmitHandler(event) {
 }
 
 function userInfoSubmitHandler(event) {
-    event.preventDefault();
-
-    let xhr = new XMLHttpRequest();
-
     let nicknameInput = document.getElementById("nickname");
     let avatarInput = document.getElementById("avatar");
     let dobInput = document.getElementById("dob");
 
-    let nicknameError = validateNickname(nicknameInput.value);
-    let avatarError = validateAvatarPath(avatarInput.value);
-    let dobError = validateDOB(dobInput.value);
 
-    if (nicknameError !== "") {
-        showError(nicknameInput, nicknameError);
-    } else {
-        markValid(nicknameInput);
-    }
+    event.preventDefault();
 
-    if (avatarError !== "") {
-        showError(avatarInput, avatarError);
-    } else {
-        markValid(avatarInput);
-    }
+    let xhr = new XMLHttpRequest();
 
-    if (dobError !== "") {
-        showError(dobInput, dobError);
-    } else {
-        markValid(dobInput);
-    }
-
-    if (nicknameError !== "" || avatarError !== "" || dobError !== "") {
-        event.preventDefault();
-    }
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let response = JSON.parse(xhr.responseText);
+            console.log("AJAX success", response);
+        } else {
+            console.error("AJAX failed", xhr.status, xhr.statusText);
+        }
+    };
 
     xhr.open("GET", "update_user_info.php?nickname=" + encodeURIComponent(nicknameInput.value) 
     + "&avatar=" + encodeURIComponent(avatarInput.value) 
