@@ -185,6 +185,7 @@ function userInfoSubmitHandler(event) {
             resultDiv.classList.remove("hidden", "update-success", "update-error");
 
             if (xhr.status === 200) {
+                console.log("Response:", xhr.responseText);
                 let response = JSON.parse(xhr.responseText);
                 if (response.success) {
                     resultDiv.textContent = response.message || "Updated successfully!";
