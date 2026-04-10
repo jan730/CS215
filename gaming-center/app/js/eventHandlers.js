@@ -202,7 +202,7 @@ function userInfoSubmitHandler(event) {
                         dobValue.textContent = response.dob;
                     }
                     if (avatarImage && response.avatar) {
-                        avatarImage.src = response.avatar;
+                        avatarImage.src = response.avatar + "?t=" + new Date().getTime();
                     }
                 } else {
                     resultDiv.textContent = response.message || "Failed to update information.";

@@ -51,6 +51,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $avatar_path = $target_dir . $uid . "." . $imageFileType;
 
+        $check = getimagesize($_FILES["avatar"]["tmp_name"]);
+        if ($check === false) {
+            $errors[] = "Not an image";
+        }
+
+        if ($_FILES["avatar"]["error"] !== UPLOAD_ERR_OK) {
+            $errors[] = "Upload error";
+        }
+
         //just replace it when we move?
         //remove old avatar if it exists
         // if (file_exists($avatar_path)) {
@@ -89,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         else{
             //if !uploadok
-            $errors["Server Error"] = "Upload not okay";
+            $errors["not uploadOk"] = "Upload not okay";
         }
     }
     else{
