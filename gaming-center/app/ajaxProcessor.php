@@ -79,6 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Move the user's avatar to the uploads directory and capture the result as $fileStatus.
             $fileStatus = move_uploaded_file($_FILES["avatar"]["tmp_name"], $avatar_path);
 
+
             // Check $fileStatus:
             if (!$fileStatus) {
                 // The user's avatar file could not be moved
@@ -111,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     'success' => true, 
                     'message' => 'Updated successfully',
                     'nickname' => $nickname,
-                    'avatar' => $avatar_path,
+                    'avatar' => $avatar_path . "?t=" . time(), // Cache busting
                     'dob' => $dob
                 ]);
             } else {
